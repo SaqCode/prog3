@@ -1,4 +1,6 @@
-class ToxicGrass extends LivingCreator {
+const LivingCreator = require("./LivingCreator");
+
+module.exports = class ToxicGrass extends LivingCreator {
     constructor(x, y) {
         super(x, y);
         this.multiply = 0;

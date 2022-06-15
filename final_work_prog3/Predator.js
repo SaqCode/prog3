@@ -1,4 +1,6 @@
-class Predator extends LivingCreator {
+const LivingCreator = require("./LivingCreator");
+
+module.exports = class Predator extends LivingCreator {
     constructor(x, y) {
         super(x, y);
         this.energy = 8;
