@@ -9,9 +9,9 @@ module.exports = class ToxicGrass extends LivingCreator {
     mul() {
         this.multiply++;
         let emptyCells = this.chooseCell(0);
-        let newCell = random(emptyCells);
+        let newCell = emptyCells[Math.floor(Math.random() * emptyCells.length + 1)];
         let emptyCells1 = this.chooseCell(1);
-        let newCell1 = random(emptyCells1);
+        let newCell1 = emptyCells1[Math.floor(Math.random() * emptyCells1.length + 1)];
 
         if (newCell && this.multiply >= 8) {
             let newX = newCell[0];

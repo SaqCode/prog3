@@ -13,7 +13,7 @@ module.exports = class GrassEater extends LivingCreator {
 
     mul() {
         let emptyCells = this.chooseCell(0);
-        let newCell = random(emptyCells);
+        let newCell = emptyCells[Math.floor(Math.random() * emptyCells.length + 1)];
 
         if (newCell) {
             let newX = newCell[0];
@@ -28,8 +28,8 @@ module.exports = class GrassEater extends LivingCreator {
 
     move() {
         this.energy--;
-        let emptyCells = this.chooseCell(0, 4);
-        let newCell = random(emptyCells);
+        let emptyCells = this.chooseCell(0);
+        let newCell = emptyCells[Math.floor(Math.random() * emptyCells.length + 1)];
         if (newCell && this.energy >= 0) {
             let newX = newCell[0];
             let newY = newCell[1];
@@ -44,11 +44,11 @@ module.exports = class GrassEater extends LivingCreator {
 
     eat() {
         let emptyCells = this.chooseCell(1),
-            newCell = random(emptyCells),
+            newCell = emptyCells[Math.floor(Math.random() * emptyCells.length + 1)],
             emptyCells1 = this.chooseCell(4),
-            newCell1 = random(emptyCells1),
+            newCell1 = emptyCells[Math.floor(Math.random() * emptyCells1.length + 1)],
             emptyCells2 = this.chooseCell(5),
-            newCell2 = random(emptyCells2);
+            newCell2 = emptyCells[Math.floor(Math.random() * emptyCells2.length + 1)];
 
         if (newCell) {
             this.energy++;

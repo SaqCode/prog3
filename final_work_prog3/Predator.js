@@ -15,7 +15,7 @@ module.exports = class Predator extends LivingCreator {
     move() {
         this.energy--;
         let emptyCells = this.chooseCell(0);
-        let newCell = random(emptyCells);
+        let newCell = emptyCells[Math.floor(Math.random() * emptyCells.length + 1)];
         if (newCell && this.energy >= 0) {
             let newX = newCell[0];
             let newY = newCell[1];
@@ -30,7 +30,7 @@ module.exports = class Predator extends LivingCreator {
 
     eat() {
         let emptyCells = this.chooseCell(2);
-        let newCell = random(emptyCells);
+        let newCell = emptyCells[Math.floor(Math.random() * emptyCells.length + 1)];
         if (newCell) {
             this.energy++;
             let newX = newCell[0];
