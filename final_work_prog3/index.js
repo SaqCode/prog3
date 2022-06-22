@@ -1,15 +1,26 @@
 const socket = io();
 
+function esim() {
+    const btn = document.getElementById("btn");
+    btn.addEventListener("click", e => {
+        console.log("yay");
+        socket.emit("send btn", e);
+    });
+}
+
+function change(){
+    socket.emit("change");
+    document.body.style.backgroundColor === "black" ? document.body.style.backgroundColor = "white" : document.body.style.backgroundColor = "black";
+}
+window.onload = esim;
+
 function setup() {
-    // frameRate(5);
     createCanvas(window.innerWidth, window.innerHeight);
 }
 
 function gameFunc(matrix) {
     
     for (let y = 0; y < matrix.length; y++) {
-
-
         for (let x = 0; x < matrix[y].length; x++) {
 
             if (matrix[y][x] === 1) {
@@ -31,7 +42,6 @@ function gameFunc(matrix) {
                 fill("orange");
                 rect(x * side, y * side, side, side);
             }
-
         }
     }
 }
