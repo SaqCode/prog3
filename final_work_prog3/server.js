@@ -73,19 +73,19 @@ function generate(matLen, gr, grEat, pr, eb, tg) {
 matrix = generate(25, 45, 20, 6, 3, 25);
 io.sockets.emit('send matrix', matrix);
 
-function createObject(matrix) {
+async function createObject(matrix) {
     for (let y = 0; y < matrix.length; y++) {
         for (let x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] === 1) {
-                grassArr.push(new Grass(x, y));
+                await grassArr.push(new Grass(x, y));
             } else if (matrix[y][x] === 2) {
-                grassEaterArr.push(new GrassEater(x, y));
+                await grassEaterArr.push(new GrassEater(x, y));
             } else if (matrix[y][x] === 3) {
-                predatorArr.push(new Predator(x, y));
+                await predatorArr.push(new Predator(x, y));
             } else if (matrix[y][x] === 4) {
-                energyBoosterArr.push(new EnergyBooster(x, y));
+                await energyBoosterArr.push(new EnergyBooster(x, y));
             } else if (matrix[y][x] === 5) {
-                toxicGrassArr.push(new ToxicGrass(x, y));
+                await toxicGrassArr.push(new ToxicGrass(x, y));
             }
         }
     }
@@ -118,11 +118,27 @@ app.get('/', (req, res) => {
 
 setInterval(game, 1000);
 
-function change() {
+function change () {
 
 }
+
+const lox = () => {
+    const filepath = path.join(path.resolve(), "state.json");
+    fs.promises.writeFile(filepath, JSON.stringify({
+        "grasses" : `${grassArr.length}`,
+        "grass eaters" : `${grassEaterArr.length}`,
+        "predators" : `${predatorArr.length}`,
+        "energyBoosters" : `${energyBoosterArr.length}`,
+        "toxicGrasses" : `${toxicGrassArr.length}`
+    }, null, 2)).then(() => {
+        fs.promises.readFile(filepath, "utf8").then(res => {
+            console.log(res);
+        });
+    });
+}
+
 io.on('connection', (socket) => {
-    createObject(matrix)
+    createObject(matrix).then(setInterval(lox, 1000));
     socket.on("change", change);
 });
 

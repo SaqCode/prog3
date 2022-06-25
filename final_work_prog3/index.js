@@ -8,9 +8,24 @@ function esim() {
     });
 }
 
-function change(){
+function change() {
     socket.emit("change");
-    document.body.style.backgroundColor === "black" ? document.body.style.backgroundColor = "white" : document.body.style.backgroundColor = "black";
+    switch (document.body.style.backgroundColor) {
+        case "white":
+            document.body.style.backgroundColor = "green";
+            break;
+        
+        case "green":
+            document.body.style.backgroundColor = "orange";
+            break;
+
+        case "orange":
+            document.body.style.backgroundColor = "yellow";
+            break;
+
+        default :
+        document.body.style.backgroundColor = "white";
+    }
 }
 window.onload = esim;
 
